@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Esri Search Widget</title>
+    <style>
+      html,
+      body {
+        padding : 0;
+        margin  : 0;
+        width   : 100%;
+      }
+
+      .heading {
+        margin    : 10px 50px;
+        font-size : x-large;
+      }
+
+      #search-widget-node {
+        margin : 10px 50px;
+        border : solid 1px #666;
+      }
+
+      #search-results-node {
+        min-height : 300px;
+        margin     : 10px 50px;
+        background : #efefef;
+        border     : solid 1px #666;
+      }
+
+      .source-name-node {
+        margin-left : 25px;
+        font-size   : larger;
+        font-weight : bold;
+      }
+
+      .details-node {
+        padding    : 3px;
+        background : #fff;
+        font-size  : x-small;
+      }
+
+    </style>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.6/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.6/"></script>
+    <script>
+      require([
+        "esri/widgets/Search",
+      ], function (Search) {
+
+        const results_node = document.querySelector("#search-results-node");
+
+        const search_widget = new Search({ container: "search-widget-node" });
+        search_widget.on("search-complete", (response) => {
+          results_node.innerHTML = "";
+
+          response.results.forEach(source_results => {
+
+            const source_name_node = document.createElement("div");
+            source_name_node.classList.add("source-name-node");
+            source_name_node.innerHTML = source_results.source.name;
+            results_node.appendChild(source_name_node);
+
+            const source_results_node = document.createElement("ol");
+            results_node.appendChild(source_results_node);
+
+            source_results.results.forEach(result => {
+              const result_node = document.createElement("li");
+              result_node.innerHTML = result.name;
+              source_results_node.appendChild(result_node);
+
+              const details_node = document.createElement("pre");
+              details_node.classList.add("details-node");
+              details_node.innerHTML = JSON.stringify(result, null, "  ");
+              result_node.appendChild(details_node);
+
+            });
+          });
+        });
+
+        search_widget.on("search-clear", (response) => {
+          results_node.innerHTML = "";
+        });
+
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="heading">
+      <a title="Esri Search widget API" href="https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html" target="_blank">
+        Esri Search Widget
+      </a>
+    </div>
+
+    <div id="search-widget-node"></div>
+
+    <div class="heading">Search Results</div>
+    <div id="search-results-node"></div>
+  </body>
+
+</html>

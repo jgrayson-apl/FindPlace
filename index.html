@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, user-scalaredble=no">
+    <title>Esri Geosearch APIs</title>
+    <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.0.1/css/calcite-web.min.css">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.0.1/js/calcite-web.min.js"></script>
+    <script src="https://js.arcgis.com/4.7/"></script>
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">                                                        
+      <!-- top navigation -->
+      <header class="top-nav">
+        <div class="grid-container">
+          <div class="column-24">
+            <span class="top-nav-title text-blue">Find places using Esri Geosearch APIs</span>
+            <nav class="top-nav-list" role="navigation" aria-labelledby="topnav">
+              <a class="top-nav-link" target="_blank" href="https://developers.arcgis.com/features/geocoding/">Esri World Geocoding Service</a>
+              <a class="top-nav-link" target="_blank" href="https://developers.arcgis.com/labs/rest/get-coordinates-for-an-address/">'Find an address' Lab</a>
+              <a class="top-nav-link" target="_blank" href="https://developers.arcgis.com/javascript/latest/api-reference/esri-tasks-Locator.html">JS API - Locator</a>
+              <a class="top-nav-link" target="_blank" href="https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html">JS API - Search Widget</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <!-- banner -->
+      <div class="panel panel-dark-blue trailer-1" style="background-image: url(https://developers.arcgis.com/assets/img/features/geocoding/hero.jpg);">
+        <div class="grid-container padding-leader-1 padding-trailer-1">
+          <div class="column-24">
+            <h1 class="text-center">Find Place</h1>
+            <input id="search-input" class="search-input text-white icon-ui-white" type='search'>
+            <button id="search-btn" class="btn btn-large btn-disabled right leader-half">Search</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- main-content -->
+      <div class="grid-container">
+
+        <!-- main content list -->
+        <div class="column-13">
+          <label>
+            <span id="result-type-label" class="avenir-bold">Results</span>
+            <aside id="search-results-panel" class="side-nav" aria-role="complementary"></aside>
+          </label>
+        </div>
+
+        <div class="column-11">
+          <label id="details-panel">
+            <span class="avenir-bold">Result Details</span>
+            <div id="selected-result-panel" class="panel font-size-2 text-blue avenir-bold"></div>
+            <table class="table table-blue table-striped">
+              <thead class="hide">
+                <tr>
+                  <th>Attribute</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody id="result-table"></tbody>
+            </table>
+          </label>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>
